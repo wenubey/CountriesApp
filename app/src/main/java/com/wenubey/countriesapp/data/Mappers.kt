@@ -1,5 +1,6 @@
 package com.wenubey.countriesapp.data
 
+import com.wenubey.CountriesInContinentQuery
 import com.wenubey.CountriesQuery
 import com.wenubey.CountryQuery
 import com.wenubey.countriesapp.domain.DetailedCountry
@@ -18,6 +19,15 @@ fun CountryQuery.Country.toDetailCountry(): DetailedCountry {
 }
 
 fun CountriesQuery.Country.toSimpleCountry(): SimpleCountry {
+    return SimpleCountry(
+        code = code,
+        name = name,
+        emoji = emoji,
+        capital = capital ?: "No information found!",
+    )
+}
+
+fun CountriesInContinentQuery.Country.toSimpleCountry(): SimpleCountry {
     return SimpleCountry(
         code = code,
         name = name,

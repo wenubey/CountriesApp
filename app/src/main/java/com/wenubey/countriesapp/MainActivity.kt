@@ -26,7 +26,12 @@ class MainActivity : ComponentActivity() {
             CountriesAppTheme {
                 val viewModel = hiltViewModel<CountriesViewModel>()
                 val state by viewModel.state.collectAsState()
-                CountriesScreen(state = state, onSelectCountry = {viewModel.selectCountry(it)}, onDismissCountryDialog = {})
+                CountriesScreen(
+                    state = state,
+                    onSelectCountry = { viewModel.selectCountry(it) },
+                    // ::function is invoke the function it's like { viewModel.dismissCountryDialog() }
+                    onDismissCountryDialog = viewModel::dismissCountryDialog,
+                )
             }
         }
     }

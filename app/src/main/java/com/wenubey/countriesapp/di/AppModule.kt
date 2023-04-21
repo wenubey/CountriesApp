@@ -3,8 +3,9 @@ package com.wenubey.countriesapp.di
 import com.apollographql.apollo3.ApolloClient
 import com.wenubey.countriesapp.data.ApolloCountryClient
 import com.wenubey.countriesapp.domain.CountryClient
-import com.wenubey.countriesapp.domain.GetCountriesUseCase
-import com.wenubey.countriesapp.domain.GetCountryUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountriesUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountryUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,5 +40,11 @@ object AppModule {
     @Singleton
     fun providesGetCountryUseCase(countryClient: CountryClient): GetCountryUseCase {
         return GetCountryUseCase(countryClient)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetCountryInContinentUseCase(countryClient: CountryClient): GetCountriesInContinentUseCase {
+        return GetCountriesInContinentUseCase(countryClient)
     }
 }

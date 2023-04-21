@@ -2,13 +2,17 @@ package com.wenubey.countriesapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wenubey.countriesapp.domain.DetailedCountry
-import com.wenubey.countriesapp.domain.GetCountriesUseCase
-import com.wenubey.countriesapp.domain.GetCountryUseCase
-import com.wenubey.countriesapp.domain.SimpleCountry
+import com.wenubey.countriesapp.core.ContinentMap
+import com.wenubey.countriesapp.core.getKeyByValue
+import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountriesUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.replay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,16 +20,47 @@ import javax.inject.Inject
 @HiltViewModel
 class CountriesViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase,
-    private val getCountryUseCase: GetCountryUseCase
-): ViewModel() {
+    private val getCountryUseCase: GetCountryUseCase,
+    private val getCountriesInContinentUseCase: GetCountriesInContinentUseCase
+) : ViewModel() {
     // this for we want to change state on viewModel not ui
     private val _state = MutableStateFlow(CountriesState())
     val state = _state.asStateFlow()
+
+    private var searchJob: Job? = null
 
     init {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             _state.update { it.copy(countries = getCountriesUseCase.execute(), isLoading = false) }
+        }
+    }
+
+    fun onSearchQueryChange(code: String) {
+        _state.update { it.copy(searchQuery = code) }
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            // Wait  0.5 second for user input
+            delay(500L)
+            getCountriesInContinent(code)
+            if (_state.value.searchQuery.isBlank()) {
+                _state.update { it.copy(countries = getCountriesUseCase.execute(), isLoading = false) }
+            }
+        }
+    }
+
+    fun getCountriesInContinent(code: String) {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    countries = getCountriesInContinentUseCase.execute(
+                        ContinentMap.continentMap.getKeyByValue(
+                            code
+                        ) ?: ""
+                    ),
+                    isLoading = false
+                )
+            }
         }
     }
 

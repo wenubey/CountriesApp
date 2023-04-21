@@ -1,0 +1,10 @@
+query CountriesInContinent($code: ID!) {
+    continent(code: $code) {
+        countries {
+            name
+            capital
+            code
+            emoji
+        }
+    }
+}
