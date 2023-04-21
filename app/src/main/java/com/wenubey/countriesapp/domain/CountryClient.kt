@@ -8,4 +8,8 @@ interface CountryClient {
     suspend fun getCountries(): List<SimpleCountry>
 
     suspend fun getCountry(code: String): DetailedCountry?
+
+    suspend fun getCountryInContinent(code: String): List<SimpleCountry>
+
+    suspend fun getCountriesRandomGivenNumber(numCountries: Int): List<SimpleCountry>
 }
