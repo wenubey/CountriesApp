@@ -85,6 +85,17 @@ type Query {
   ): [Language!]!
 }
 
+union _Entity = Country|Continent|Language
+
+scalar _Any
+
+type _Service {
+  """
+  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
+  """
+  sdl: String
+}
+
 type State {
   code: String
 
