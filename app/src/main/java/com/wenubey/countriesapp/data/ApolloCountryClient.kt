@@ -35,35 +35,6 @@ class ApolloCountryClient(
         }
         return list
     }
-
-//    override suspend fun getCountriesRandomGivenNumber(numCountries: Int): List<CountryDto> {
-//        val graphQLResponse = apolloClient
-//            .query(CountriesRandomGivenNumberQuery())
-//            .execute()
-//            .data
-//            ?.countries
-//            ?.shuffled()
-//            ?.take(numCountries)
-//            ?.map { it.toCountryName() }
-//            ?: emptyList()
-//        graphQLResponse.forEach {
-//            Log.i("TAG", "graphQL name: $it")
-//        }
-//
-//        val list = mutableListOf<CountryDto>()
-//        graphQLResponse.forEach { countryName ->
-//            try {
-//                val countries = api.getCountries(countryName)
-//                list.addAll(countries)
-//            } catch (e: Exception) {
-//                Log.e("TAG", "ApolloCountryClientCallError: $countryName", e)
-//            }
-//        }
-//        list.forEach {
-//                Log.i("TAG", "list items: ${it.name.common}")
-//        }
-//        return list
-//    }
 }
 
 
