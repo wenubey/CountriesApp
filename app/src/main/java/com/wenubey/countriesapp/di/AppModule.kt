@@ -7,9 +7,6 @@ import com.wenubey.countriesapp.data.ApolloCountryClient
 import com.wenubey.countriesapp.data.CountriesApi
 import com.wenubey.countriesapp.domain.CountryClient
 import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
-import com.wenubey.countriesapp.domain.use_case.GetCountriesRandomGivenNumberUseCase
-import com.wenubey.countriesapp.domain.use_case.GetCountriesUseCase
-import com.wenubey.countriesapp.domain.use_case.GetCountryUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,30 +34,12 @@ object AppModule {
         return ApolloCountryClient(apolloClient, api)
     }
 
-    @Provides
-    @Singleton
-    fun providesGetCountriesUseCase(countryClient: CountryClient): GetCountriesUseCase {
-        return GetCountriesUseCase(countryClient)
-    }
-
-    @Provides
-    @Singleton
-    fun providesGetCountryUseCase(countryClient: CountryClient): GetCountryUseCase {
-        return GetCountryUseCase(countryClient)
-    }
 
     @Provides
     @Singleton
     fun providesGetCountryInContinentUseCase(countryClient: CountryClient): GetCountriesInContinentUseCase {
         return GetCountriesInContinentUseCase(countryClient)
     }
-
-    @Provides
-    @Singleton
-    fun providesGetCountriesRandomGivenNumber(countryClient: CountryClient): GetCountriesRandomGivenNumberUseCase {
-        return GetCountriesRandomGivenNumberUseCase(countryClient)
-    }
-
 
     @Provides
     @Singleton

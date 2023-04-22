@@ -1,15 +1,15 @@
 package com.wenubey.countriesapp.domain.use_case
 
+import com.wenubey.countriesapp.data.CountryDto
 import com.wenubey.countriesapp.domain.CountryClient
-import com.wenubey.countriesapp.domain.SimpleCountry
 
 class GetCountriesInContinentUseCase(
     private val countryClient: CountryClient
 ) {
 
-    suspend fun execute(code: String): List<SimpleCountry> {
+    suspend fun execute(code: String, numCountries: Int): List<CountryDto> {
         return countryClient
-            .getCountryInContinent(code)
-            .sortedBy { it.name }
+            .getCountryInContinent(code, numCountries)
+            .sortedBy { it.name.common }
     }
 }

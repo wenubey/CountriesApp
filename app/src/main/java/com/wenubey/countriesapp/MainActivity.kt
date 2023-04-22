@@ -29,11 +29,9 @@ class MainActivity : ComponentActivity() {
                 val state by viewModel.state.collectAsStateWithLifecycle()
                 CountriesScreen(
                     state = state,
-                    onSelectCountry = { viewModel.selectCountry(it) },
                     // ::function is invoke the function it's like { viewModel.dismissCountryDialog() }
-                    onDismissCountryDialog = viewModel::dismissCountryDialog,
-                    onSearchQueryChange = viewModel::onSearchQueryChange,
-                    onSliderValueChange = viewModel::onSliderValueChange
+                    onSliderValueChange = viewModel::onSliderValueChange,
+                    onSelectedContinentChane = viewModel::onMenuContinentSelected
                 )
             }
         }

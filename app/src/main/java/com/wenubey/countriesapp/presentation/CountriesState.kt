@@ -1,12 +1,10 @@
 package com.wenubey.countriesapp.presentation
 
-import com.wenubey.countriesapp.domain.DetailedCountry
-import com.wenubey.countriesapp.domain.SimpleCountry
+import com.wenubey.countriesapp.data.CountryDto
 
 data class CountriesState(
-    val countries: List<SimpleCountry> = emptyList(),
+    val countries: List<CountryDto> = emptyList(),
     val isLoading: Boolean =false,
-    val selectedCountry: DetailedCountry? = null,
-    val searchQuery: String = "",
+    val selectedContinent: String = "",
     val sliderValue: Float = 0f
 )

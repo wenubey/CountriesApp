@@ -1,8 +1,5 @@
 package com.wenubey.countriesapp.presentation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,36 +7,27 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.wenubey.countriesapp.R
+import com.wenubey.countriesapp.core.ContinentMap
 import com.wenubey.countriesapp.core.components.ProgressBar
-import com.wenubey.countriesapp.presentation.components.CountryDetail
-import com.wenubey.countriesapp.presentation.components.CountryItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountriesScreen(
     state: CountriesState,
-    onSelectCountry: (code: String) -> Unit,
-    onDismissCountryDialog: () -> Unit,
-    onSearchQueryChange: (query: String) -> Unit,
     onSliderValueChange: (sliderValue: Float) -> Unit,
+    onSelectedContinentChane: (continent: String) -> Unit
 ) {
 
     Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
@@ -53,13 +41,13 @@ fun CountriesScreen(
                     .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                OutlinedTextField(
-                    value = state.searchQuery,
-                    onValueChange = onSearchQueryChange,
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(R.string.search)) },
-                    placeholder = { Text(text = stringResource(R.string.enter_continent_name)) }
-                )
+                LazyRow(modifier = Modifier.fillMaxWidth()) {
+                    items(ContinentMap.continentMap.values.toList()) { continent ->
+                        Button(onClick = { onSelectedContinentChane(continent)  }, modifier = Modifier.padding(2.dp)) {
+                            Text(text = continent)
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "${state.sliderValue.toInt()}", fontSize = 24.sp)
                 Slider(
@@ -75,28 +63,10 @@ fun CountriesScreen(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(state.countries) { country ->
-                        CountryItem(country = country,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onSelectCountry(country.code) }
-                                .padding(16.dp)
-                        )
+                    items(state.countries) {
+                        Text(text = it.name.common)
                     }
                 }
-            }
-
-            if (state.selectedCountry != null) {
-                CountryDetail(
-                    country = state.selectedCountry,
-                    onDismiss = onDismissCountryDialog,
-                    modifier = Modifier
-                        .clip(
-                            RoundedCornerShape(5.dp)
-                        )
-                        .background(Color.White)
-                        .padding(16.dp)
-                )
             }
         }
     }
