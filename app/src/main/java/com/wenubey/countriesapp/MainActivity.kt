@@ -30,8 +30,9 @@ class MainActivity : ComponentActivity() {
                 CountriesScreen(
                     state = state,
                     // ::function is invoke the function it's like { viewModel.dismissCountryDialog() }
-                    onSliderValueChange = viewModel::onSliderValueChange,
-                    onSelectedContinentChane = viewModel::onMenuContinentSelected
+                    onSelectedContinentChange = viewModel::onMenuContinentSelected,
+                    onUserSelected = viewModel::getCountriesInContinent,
+                    onSelectedNumberChange = viewModel::onMenuNumberSelected
                 )
             }
         }

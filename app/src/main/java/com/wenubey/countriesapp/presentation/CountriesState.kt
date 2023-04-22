@@ -6,5 +6,5 @@ data class CountriesState(
     val countries: List<CountryDto> = emptyList(),
     val isLoading: Boolean =false,
     val selectedContinent: String = "",
-    val sliderValue: Float = 0f
+    val selectedNumber: Int = 0,
 )

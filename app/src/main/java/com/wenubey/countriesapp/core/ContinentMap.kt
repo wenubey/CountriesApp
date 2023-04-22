@@ -10,6 +10,5 @@ object ContinentMap {
         "OC" to "Oceania",
         "SA" to "South America"
     )
-
 }
 

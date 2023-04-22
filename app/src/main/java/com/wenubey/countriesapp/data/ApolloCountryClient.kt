@@ -10,15 +10,13 @@ class ApolloCountryClient(
     private val api: CountriesApi
 ) : CountryClient {
 
-    override suspend fun getCountryInContinent(code: String, numCountries: Int): List<CountryDto> {
+    override suspend fun getCountryInContinent(code: String): List<CountryDto> {
         val graphQlResponse =  apolloClient
             .query(CountriesInContinentQuery(code))
             .execute()
             .data
             ?.continent
             ?.countries
-            ?.shuffled()
-            ?.take(numCountries)
             ?.map { it.toCountryName() }
             ?: emptyList()
         val list = mutableListOf<CountryDto>()
@@ -29,9 +27,6 @@ class ApolloCountryClient(
             }catch (e: Exception) {
                 Log.e("TAG", "ApolloCountryClientCallError: $countryName", e)
             }
-        }
-        list.forEach {
-            Log.i("TAG", "from list: ${it.name.common}")
         }
         return list
     }

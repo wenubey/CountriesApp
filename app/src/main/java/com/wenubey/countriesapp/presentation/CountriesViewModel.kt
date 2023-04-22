@@ -22,37 +22,33 @@ class CountriesViewModel @Inject constructor(
     private val _state = MutableStateFlow(CountriesState())
     val state = _state.asStateFlow()
 
-    private var slideJob: Job? = null
-    private var selectJob: Job? = null
     fun onSliderValueChange(sliderValue: Float) {
-        _state.update { it.copy(sliderValue = sliderValue) }
-        slideJob?.cancel()
-        slideJob = viewModelScope.launch {
-            delay(500L)
-            getCountriesInContinent(state.value.selectedContinent, state.value.sliderValue.toInt())
-        }
+
     }
 
     fun onMenuContinentSelected(continent: String) {
         _state.update { it.copy(selectedContinent = continent) }
-        selectJob?.cancel()
-        selectJob = viewModelScope.launch {
-
-        }
     }
 
-    private fun getCountriesInContinent(code: String, numCountries: Int) {
+    fun onMenuNumberSelected(number: Int) {
+        _state.update { it.copy(selectedNumber = number) }
+    }
+
+    fun getCountriesInContinent() {
         viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+
+            val continent = ContinentMap.continentMap.getKeyByValue(state.value.selectedContinent) ?: ""
+            val selectedNumber = state.value.selectedNumber
+
+            val countries = if (selectedNumber > 0) {
+                getCountriesInContinentUseCase.execute(continent).shuffled().take(selectedNumber)
+            } else {
+                getCountriesInContinentUseCase.execute(continent)
+            }
+
             _state.update {
-                it.copy(
-                    countries = getCountriesInContinentUseCase.execute(
-                        ContinentMap.continentMap.getKeyByValue(
-                            code,
-                        ) ?: "",
-                        numCountries = numCountries,
-                    ),
-                    isLoading = false
-                )
+                it.copy(countries = countries, isLoading = false, selectedNumber = 0)
             }
         }
     }

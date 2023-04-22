@@ -7,9 +7,9 @@ class GetCountriesInContinentUseCase(
     private val countryClient: CountryClient
 ) {
 
-    suspend fun execute(code: String, numCountries: Int): List<CountryDto> {
+    suspend fun execute(code: String): List<CountryDto> {
         return countryClient
-            .getCountryInContinent(code, numCountries)
+            .getCountryInContinent(code)
             .sortedBy { it.name.common }
     }
 }
