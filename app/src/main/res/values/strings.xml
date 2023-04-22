@@ -8,4 +8,5 @@
     <string name="capital_of_the_country">Capital of the country</string>
     <string name="population_of_the_country">Population of the country</string>
     <string name="currencies_of_the_current_country">Currencies of the current country</string>
+    <string name="subregion_of_this_country">Subregion of this country</string>
 </resources>

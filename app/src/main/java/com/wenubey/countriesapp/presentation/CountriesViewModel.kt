@@ -48,7 +48,7 @@ class CountriesViewModel @Inject constructor(
             }
 
             _state.update {
-                it.copy(countries = countries, isLoading = false, selectedNumber = 0)
+                it.copy(countries = countries, isLoading = false)
             }
         }
     }
