@@ -5,3 +5,5 @@ fun Map<String,String>.getKeyByValue(value: String): String? {
         it.value.contains(value, ignoreCase = true
         ) }?.key
 }
+
+fun String?.nullCheck(): String =  this ?: "No info found"

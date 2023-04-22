@@ -10,6 +10,6 @@ class GetCountriesInContinentUseCase(
     suspend fun execute(code: String): List<CountryDto> {
         return countryClient
             .getCountryInContinent(code)
-            .sortedBy { it.name.common }
+            .sortedBy { it.name?.common }
     }
 }

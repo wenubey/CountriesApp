@@ -5,4 +5,7 @@
     <string name="enter_continent_name">Enter continent name</string>
     <string name="apply">Apply</string>
     <string name="reset_the_number">Reset the number</string>
+    <string name="capital_of_the_country">Capital of the country</string>
+    <string name="population_of_the_country">Population of the country</string>
+    <string name="currencies_of_the_current_country">Currencies of the current country</string>
 </resources>
