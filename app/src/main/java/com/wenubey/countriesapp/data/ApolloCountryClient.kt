@@ -17,7 +17,7 @@ class ApolloCountryClient(
             .data
             ?.continent
             ?.countries
-            ?.map { it.toCountryName() }
+            ?.map { it.name }
             ?: emptyList()
         val list = mutableListOf<CountryDto>()
         graphQlResponse.forEach { countryName ->

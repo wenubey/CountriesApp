@@ -1,5 +1,6 @@
 package com.wenubey.countriesapp.presentation
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,10 +24,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.wenubey.countriesapp.R
 import com.wenubey.countriesapp.core.ContinentMap
 import com.wenubey.countriesapp.core.components.ProgressBar
 import com.wenubey.countriesapp.presentation.components.CountrySelectRow
+import com.wenubey.countriesapp.presentation.components.NumberSelectRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,39 +61,42 @@ fun CountriesScreen(
                     selectedContinent = selectedContinent
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                LazyRow {
-                    for (index in 2..10) {
-                        item {
-                            Button(
-                                onClick = {
-                                    selectedNumber.value = index
-                                    onSelectedNumberChange(index)
-                                },
-                                modifier = Modifier.padding(2.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = if (index == selectedNumber.value) Color.Green else Color.Blue
-                                )
-                            ) {
-                                Text(text = index.toString())
-                            }
-                        }
-                    }
-                }
+                NumberSelectRow(
+                    onSelectedNumberChange = onSelectedNumberChange,
+                    selectedNumber = selectedNumber
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
                     Button(onClick = onUserSelected) {
-                        Text(text = "Apply")
+                        Text(text = stringResource(R.string.apply))
                     }
-                    Button(onClick = { onSelectedNumberChange(0) }) {
-                        Text(text = "Reset the number")
+                    Button(onClick = {
+                        onSelectedNumberChange(0)
+                        selectedNumber.value = 0
+                    }) {
+                        Text(text = stringResource(R.string.reset_the_number))
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(state.countries) {
-                        Text(text = it.name.common)
+                    items(state.countries) { country ->
+
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text(text = "${country.name.official} ")
+                            Text(text = "---------------------")
+                            Text(text = "Official Name: ${country.name.official} ")
+                            Text(text = "---------------------")
+                            Text(text = "Native Common Name: ${country.name.nativeName.common}")
+                            Text(text = "---------------------")
+                            Text(text = country.name.nativeName.official)
+                            Text(text = "---------------------")
+                        }
+
                     }
                 }
             }
