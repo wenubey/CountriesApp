@@ -4,6 +4,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.wenubey.countriesapp.data.ApolloCountryClient
 import com.wenubey.countriesapp.domain.CountryClient
 import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
+import com.wenubey.countriesapp.domain.use_case.GetCountriesRandomGivenNumberUseCase
 import com.wenubey.countriesapp.domain.use_case.GetCountriesUseCase
 import com.wenubey.countriesapp.domain.use_case.GetCountryUseCase
 import dagger.Module
@@ -46,5 +47,11 @@ object AppModule {
     @Singleton
     fun providesGetCountryInContinentUseCase(countryClient: CountryClient): GetCountriesInContinentUseCase {
         return GetCountriesInContinentUseCase(countryClient)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetCountriesRandomGivenNumber(countryClient: CountryClient): GetCountriesRandomGivenNumberUseCase {
+        return GetCountriesRandomGivenNumberUseCase(countryClient)
     }
 }

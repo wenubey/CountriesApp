@@ -12,8 +12,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,9 +30,9 @@ import com.wenubey.countriesapp.presentation.components.CountryItem
 @Composable
 fun CountriesScreen(
     state: CountriesState,
-    viewModel: CountriesViewModel = hiltViewModel(),
     onSelectCountry: (code: String) -> Unit,
-    onDismissCountryDialog: () -> Unit
+    onDismissCountryDialog: () -> Unit,
+    onSearchQueryChange: (String) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         if (state.isLoading) {
@@ -37,8 +40,8 @@ fun CountriesScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            Column() {
-                TextField(value = state.searchQuery, onValueChange = {viewModel.onSearchQueryChange(it)})
+            Column(modifier = Modifier.fillMaxSize()) {
+                TextField(value = state.searchQuery, onValueChange = onSearchQueryChange, modifier = Modifier.fillMaxWidth())
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
