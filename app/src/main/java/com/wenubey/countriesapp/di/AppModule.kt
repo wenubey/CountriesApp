@@ -1,7 +1,8 @@
 package com.wenubey.countriesapp.di
 
 import com.apollographql.apollo3.ApolloClient
-import com.wenubey.countriesapp.core.Constants.BASE_URL
+import com.wenubey.countriesapp.core.Constants.BASE_URL_GRAPHQL
+import com.wenubey.countriesapp.core.Constants.BASE_URL_REST
 import com.wenubey.countriesapp.data.ApolloCountryClient
 import com.wenubey.countriesapp.data.CountriesApi
 import com.wenubey.countriesapp.domain.CountryClient
@@ -26,7 +27,7 @@ object AppModule {
     @Singleton
     fun provideApolloClient(): ApolloClient {
         return ApolloClient.Builder()
-            .serverUrl("https://countries.trevorblades.com/graphql")
+            .serverUrl(BASE_URL_GRAPHQL)
             .build()
     }
 
@@ -65,7 +66,7 @@ object AppModule {
     @Singleton
     fun provideCountriesApi(): CountriesApi {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL_REST)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create()

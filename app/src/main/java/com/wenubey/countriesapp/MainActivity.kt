@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wenubey.countriesapp.presentation.CountriesScreen
 import com.wenubey.countriesapp.presentation.CountriesViewModel
 import com.wenubey.countriesapp.ui.theme.CountriesAppTheme
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CountriesAppTheme {
                 val viewModel = hiltViewModel<CountriesViewModel>()
-                val state by viewModel.state.collectAsState()
+                val state by viewModel.state.collectAsStateWithLifecycle()
                 CountriesScreen(
                     state = state,
                     onSelectCountry = { viewModel.selectCountry(it) },

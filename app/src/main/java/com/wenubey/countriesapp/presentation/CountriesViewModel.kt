@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wenubey.countriesapp.core.ContinentMap
 import com.wenubey.countriesapp.core.getKeyByValue
+import com.wenubey.countriesapp.data.toListOfDetailedCountry
 import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
 import com.wenubey.countriesapp.domain.use_case.GetCountriesRandomGivenNumberUseCase
 import com.wenubey.countriesapp.domain.use_case.GetCountriesUseCase
@@ -25,7 +26,7 @@ class CountriesViewModel @Inject constructor(
     private val getCountriesInContinentUseCase: GetCountriesInContinentUseCase,
     private val getCountriesRandomGivenNumberUseCase: GetCountriesRandomGivenNumberUseCase
 ) : ViewModel() {
-    // this for we want to change state on viewModel not ui
+
     private val _state = MutableStateFlow(CountriesState())
     val state = _state.asStateFlow()
 
@@ -73,7 +74,7 @@ class CountriesViewModel @Inject constructor(
             list.forEach {
                 Log.i("TAG", "viewModel: ${it.name.common}")
             }
-            //_state.update { it.copy(countries = getCountriesRandomGivenNumberUseCase.execute(numCountries), isLoading = false) }
+            _state.update { it.copy(selectedCountry = getCountriesRandomGivenNumberUseCase.execute(numCountries).toListOfDetailedCountry().first(), isLoading = false) }
         }
     }
 

@@ -22,7 +22,7 @@ class ApolloCountryClient(
             .data
             ?.countries
             ?.map { it.toSimpleCountry() } // mapping to the domain modal
-            ?: emptyList() // if its null we return empty list
+            ?: emptyList()
     }
 
     override suspend fun getCountry(code: String): DetailedCountry? {
@@ -61,9 +61,12 @@ class ApolloCountryClient(
         }
 
         val list = mutableListOf<CountryDto>()
-        graphQLResponse.forEach {
-            api.getCountries(it).forEach { country ->
-                list.add(country)
+        graphQLResponse.forEach { countryName ->
+            try {
+                val countries = api.getCountries(countryName)
+                list.addAll(countries)
+            } catch (e: Exception) {
+                Log.e("TAG", "ApolloCountryClientCallError: $countryName", e)
             }
         }
         list.forEach {
