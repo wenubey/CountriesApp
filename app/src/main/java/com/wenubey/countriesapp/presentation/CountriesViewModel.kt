@@ -71,7 +71,7 @@ class CountriesViewModel @Inject constructor(
             _state.update { it.copy(isLoading = true) }
             val list = getCountriesRandomGivenNumberUseCase.execute(numCountries)
             list.forEach {
-                Log.i("TAG", "${it.name}")
+                Log.i("TAG", "viewModel: ${it.name.common}")
             }
             //_state.update { it.copy(countries = getCountriesRandomGivenNumberUseCase.execute(numCountries), isLoading = false) }
         }

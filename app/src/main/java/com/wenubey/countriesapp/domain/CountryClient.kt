@@ -1,6 +1,6 @@
 package com.wenubey.countriesapp.domain
 
-import CountryDto
+import com.wenubey.countriesapp.data.CountryDto
 
 
 // We create for abstraction if we want to change graphql api to rest api

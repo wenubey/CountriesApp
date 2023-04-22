@@ -1,6 +1,6 @@
 package com.wenubey.countriesapp.data
 
-import CountryDto
+import android.util.Log
 import com.apollographql.apollo3.ApolloClient
 import com.wenubey.CountriesInContinentQuery
 import com.wenubey.CountriesQuery
@@ -13,7 +13,7 @@ import com.wenubey.countriesapp.domain.SimpleCountry
 class ApolloCountryClient(
     private val apolloClient: ApolloClient,
     private val api: CountriesApi
-): CountryClient {
+) : CountryClient {
 
     override suspend fun getCountries(): List<SimpleCountry> {
         return apolloClient
@@ -47,17 +47,28 @@ class ApolloCountryClient(
     }
 
     override suspend fun getCountriesRandomGivenNumber(numCountries: Int): List<CountryDto> {
-        val graphQLResponse =  apolloClient
+        val graphQLResponse = apolloClient
             .query(CountriesRandomGivenNumberQuery())
             .execute()
             .data
             ?.countries
+            ?.shuffled()
+            ?.take(numCountries)
             ?.map { it.toCountryName() }
             ?: emptyList()
-        var list = mutableListOf<CountryDto>()
-       graphQLResponse.forEach {
-           list = api.getCountries(it).toMutableList()
-       }
-       return list
+        graphQLResponse.forEach {
+            Log.i("TAG", "graphQL name: $it")
+        }
+
+        val list = mutableListOf<CountryDto>()
+        graphQLResponse.forEach {
+            api.getCountries(it).forEach { country ->
+                list.add(country)
+            }
+        }
+        list.forEach {
+                Log.i("TAG", "list items: ${it.name.common}")
+        }
+        return list
     }
 }

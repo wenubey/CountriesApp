@@ -1,6 +1,6 @@
 package com.wenubey.countriesapp.data
 
-import CountryDto
+
 import retrofit2.http.GET
 import retrofit2.http.Path
 

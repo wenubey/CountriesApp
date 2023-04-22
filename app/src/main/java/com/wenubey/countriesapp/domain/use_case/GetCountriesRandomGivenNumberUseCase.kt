@@ -1,6 +1,7 @@
 package com.wenubey.countriesapp.domain.use_case
 
-import CountryDto
+
+import com.wenubey.countriesapp.data.CountryDto
 import com.wenubey.countriesapp.domain.CountryClient
 
 class GetCountriesRandomGivenNumberUseCase(

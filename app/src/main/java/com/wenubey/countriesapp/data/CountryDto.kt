@@ -1,34 +1,24 @@
+package com.wenubey.countriesapp.data
 data class CountryDto(
     val name: Name,
     val capital: List<String>?,
     val population: Int,
-    val currencies: List<Currency>,
+    val currencies: Map<String, CurrencyDetail>,
     val subregion: String?,
-    val languages: List<Language>
+    val languages: Map<String, String>
 )
 
 data class Name(
     val common: String,
     val official: String,
-    val nativeName: List<NativeName>
+    val nativeName: NativeName
 )
 
 data class NativeName(
-    val code: CodeName,
-)
-
-data class CodeName(
     val official: String,
-    val common: String,
+    val common: String
 )
 
-data class Language(
-    val code: String,
-)
-
-data class Currency(
-    val name: CurrencyDetail
-)
 
 data class CurrencyDetail(
     val name: String,
