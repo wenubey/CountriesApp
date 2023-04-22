@@ -8,4 +8,5 @@ data class CountriesState(
     val isLoading: Boolean =false,
     val selectedCountry: DetailedCountry? = null,
     val searchQuery: String = "",
+    val sliderValue: Float = 0f
 )

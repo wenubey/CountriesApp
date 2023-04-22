@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     onSelectCountry = { viewModel.selectCountry(it) },
                     // ::function is invoke the function it's like { viewModel.dismissCountryDialog() }
                     onDismissCountryDialog = viewModel::dismissCountryDialog,
-                    onSearchQueryChange = viewModel::onSearchQueryChange
+                    onSearchQueryChange = viewModel::onSearchQueryChange,
+                    onSliderValueChange = viewModel::onSliderValueChange
                 )
             }
         }

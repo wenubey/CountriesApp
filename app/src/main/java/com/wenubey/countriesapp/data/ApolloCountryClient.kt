@@ -1,15 +1,18 @@
 package com.wenubey.countriesapp.data
 
+import CountryDto
 import com.apollographql.apollo3.ApolloClient
 import com.wenubey.CountriesInContinentQuery
 import com.wenubey.CountriesQuery
+import com.wenubey.CountriesRandomGivenNumberQuery
 import com.wenubey.CountryQuery
 import com.wenubey.countriesapp.domain.CountryClient
 import com.wenubey.countriesapp.domain.DetailedCountry
 import com.wenubey.countriesapp.domain.SimpleCountry
 
 class ApolloCountryClient(
-    private val apolloClient: ApolloClient
+    private val apolloClient: ApolloClient,
+    private val api: CountriesApi
 ): CountryClient {
 
     override suspend fun getCountries(): List<SimpleCountry> {
@@ -43,16 +46,18 @@ class ApolloCountryClient(
             ?: emptyList()
     }
 
-    override suspend fun getCountriesRandomGivenNumber(numCountries: Int): List<SimpleCountry> {
-        return apolloClient
-            .query(CountriesQuery())
+    override suspend fun getCountriesRandomGivenNumber(numCountries: Int): List<CountryDto> {
+        val graphQLResponse =  apolloClient
+            .query(CountriesRandomGivenNumberQuery())
             .execute()
             .data
             ?.countries
-            ?.map { it.toSimpleCountry() }
-            ?.shuffled() // pick random countries
-            ?.take(numCountries)
+            ?.map { it.toCountryName() }
             ?: emptyList()
-
+        var list = mutableListOf<CountryDto>()
+       graphQLResponse.forEach {
+           list = api.getCountries(it).toMutableList()
+       }
+       return list
     }
 }

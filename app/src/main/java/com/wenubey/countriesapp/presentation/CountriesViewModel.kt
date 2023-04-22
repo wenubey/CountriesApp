@@ -1,5 +1,6 @@
 package com.wenubey.countriesapp.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wenubey.countriesapp.core.ContinentMap
@@ -29,6 +30,7 @@ class CountriesViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     private var searchJob: Job? = null
+    private var slideJob: Job? = null
 
     init {
         getCountries()
@@ -44,7 +46,15 @@ class CountriesViewModel @Inject constructor(
             if (_state.value.searchQuery.isBlank()) {
                 getCountries()
             }
+        }
+    }
 
+    fun onSliderValueChange(sliderValue: Float) {
+        _state.update { it.copy(sliderValue = sliderValue) }
+        slideJob?.cancel()
+        slideJob = viewModelScope.launch {
+            delay(500L)
+            getCountriesRandomGivenNumber(sliderValue.toInt())
         }
     }
 
@@ -59,7 +69,11 @@ class CountriesViewModel @Inject constructor(
     private fun getCountriesRandomGivenNumber(numCountries: Int) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
-            _state.update { it.copy(countries = getCountriesRandomGivenNumberUseCase.execute(numCountries), isLoading = false) }
+            val list = getCountriesRandomGivenNumberUseCase.execute(numCountries)
+            list.forEach {
+                Log.i("TAG", "${it.name}")
+            }
+            //_state.update { it.copy(countries = getCountriesRandomGivenNumberUseCase.execute(numCountries), isLoading = false) }
         }
     }
 

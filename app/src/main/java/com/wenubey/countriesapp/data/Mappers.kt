@@ -2,6 +2,7 @@ package com.wenubey.countriesapp.data
 
 import com.wenubey.CountriesInContinentQuery
 import com.wenubey.CountriesQuery
+import com.wenubey.CountriesRandomGivenNumberQuery
 import com.wenubey.CountryQuery
 import com.wenubey.countriesapp.domain.DetailedCountry
 import com.wenubey.countriesapp.domain.SimpleCountry
@@ -35,3 +36,8 @@ fun CountriesInContinentQuery.Country.toSimpleCountry(): SimpleCountry {
         capital = capital ?: "No information found!",
     )
 }
+
+fun CountriesRandomGivenNumberQuery.Country.toCountryName(): String {
+    return this.name
+}
+
