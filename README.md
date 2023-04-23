@@ -69,7 +69,7 @@ $ git clone https://github.com/wenubey/CountriesApp.git
 
 ## Screenshots
 
-![](screenshots/6.png =500x500)
+<img src="screenshots/6.png" alt="alt text" width="720" height="1280"> 
 
-![](screenshots/7.png =500x500)
+<img src="screenshots/7.png" alt="alt text" width="720" height="1280">
     
