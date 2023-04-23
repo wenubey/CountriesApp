@@ -29,14 +29,6 @@ class ApolloCountryClient(
                 Log.e("TAG", "ApolloCountryClientCallError: $countryName", e)
             }
         }
-        list.forEach {
-            if (it.name?.nativeName?.official == null) {
-                Log.i("TAG", "native official name: it is null")
-            } else {
-                Log.i("TAG", "native official name: ${it.name.nativeName.official}")
-            }
-
-        }
         return list
     }
 }
