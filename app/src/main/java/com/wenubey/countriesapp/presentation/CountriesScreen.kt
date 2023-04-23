@@ -32,9 +32,10 @@ import com.wenubey.countriesapp.presentation.components.NumberSelectRow
 fun CountriesScreen(
     state: CountriesState,
     onSelectedContinentChange: (continent: String) -> Unit,
-    onUserSelected: () -> Unit,
-    onSelectedNumberChange: (number: Int) -> Unit
-) {
+    getCountriesInContinent: () -> Unit,
+    onSelectedNumberChange: (number: Int) -> Unit,
+
+    ) {
     val selectedContinent = remember { mutableStateOf("") }
     val selectedNumber = remember {
         mutableStateOf(0)
@@ -65,7 +66,7 @@ fun CountriesScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Button(onClick = onUserSelected) {
+                    Button(onClick = getCountriesInContinent) {
                         Text(text = stringResource(R.string.apply))
                     }
                     Button(onClick = {

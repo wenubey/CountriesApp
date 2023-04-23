@@ -1,13 +1,14 @@
 package com.wenubey.countriesapp.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wenubey.countriesapp.core.Constants.SELECTED_CONTINENT_KEY
+import com.wenubey.countriesapp.core.Constants.SELECTED_NUMBER_KEY
 import com.wenubey.countriesapp.core.ContinentMap
 import com.wenubey.countriesapp.core.getKeyByValue
 import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,21 +18,23 @@ import javax.inject.Inject
 @HiltViewModel
 class CountriesViewModel @Inject constructor(
     private val getCountriesInContinentUseCase: GetCountriesInContinentUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(CountriesState())
+    private val _state = MutableStateFlow(CountriesState(
+        selectedContinent = savedStateHandle[SELECTED_CONTINENT_KEY] ?: "",
+        selectedNumber = savedStateHandle[SELECTED_NUMBER_KEY] ?: 0
+    ))
     val state = _state.asStateFlow()
 
-    fun onSliderValueChange(sliderValue: Float) {
-
-    }
-
-    fun onMenuContinentSelected(continent: String) {
+    fun onSelectedContinentChange(continent: String) {
         _state.update { it.copy(selectedContinent = continent) }
+        savedStateHandle[SELECTED_CONTINENT_KEY] = continent
     }
 
     fun onMenuNumberSelected(number: Int) {
         _state.update { it.copy(selectedNumber = number) }
+        savedStateHandle[SELECTED_NUMBER_KEY] = number
     }
 
     fun getCountriesInContinent() {

@@ -25,7 +25,7 @@ fun CountryItemCard(
     country: CountryDto
 ) {
     ElevatedCard(
-        modifier = Modifier.padding(2.dp),
+        modifier = Modifier.padding(8.dp),
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp),
