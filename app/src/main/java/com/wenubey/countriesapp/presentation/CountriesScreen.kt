@@ -41,7 +41,7 @@ fun CountriesScreen(
     onSelectedNumberChange: (number: Int) -> Unit,
 
     ) {
-    val selectedContinent = rememberSaveable { mutableStateOf("") }
+    val selectedContinent = rememberSaveable { mutableStateOf("Africa") }
     val selectedNumber = rememberSaveable {
         mutableStateOf(0)
     }

@@ -22,7 +22,7 @@ class CountriesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CountriesState(
-        selectedContinent = savedStateHandle[SELECTED_CONTINENT_KEY] ?: "",
+        selectedContinent = savedStateHandle[SELECTED_CONTINENT_KEY] ?: "Africa",
         selectedNumber = savedStateHandle[SELECTED_NUMBER_KEY] ?: 0
     ))
     val state = _state.asStateFlow()
@@ -41,7 +41,7 @@ class CountriesViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
 
-            val continent = ContinentMap.continentMap.getKeyByValue(state.value.selectedContinent) ?: ""
+            val continent = ContinentMap.continentMap.getKeyByValue(state.value.selectedContinent) ?: "Africa"
             val selectedNumber = state.value.selectedNumber
 
             getCountriesInContinentUseCase.execute(continent).collect { countryList ->
