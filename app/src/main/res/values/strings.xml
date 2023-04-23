@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">CountriesApp</string>
-    <string name="continent">Continent: %1$s</string>
-    <string name="search">Search</string>
-    <string name="enter_continent_name">Enter continent name</string>
     <string name="apply">Apply</string>
     <string name="reset_the_number">Reset the number</string>
     <string name="capital_of_the_country">Capital of the country</string>

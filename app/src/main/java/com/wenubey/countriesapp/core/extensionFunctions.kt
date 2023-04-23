@@ -1,6 +1,5 @@
 package com.wenubey.countriesapp.core
 
-import androidx.compose.ui.text.toUpperCase
 import com.wenubey.countriesapp.data.remote.CurrencyDetailDto
 
 fun Map<String,String>.getKeyByValue(value: String): String? {
