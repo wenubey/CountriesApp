@@ -5,7 +5,7 @@ In this application, it is aimed to obtain information about the countries in th
 
 ## How To Use App
 
-You have to choose continent from continent row. If you don't choose anything application get Africa as a continent. Number of list is optional. After the choosing continent and number click to apply button to see any result. And if you want to reset the number choice click the reset the number button. Have a good learn and fun!
+You have to choose continent from continents row. If you don't choose anything application gets Africa as a default continent. Number of list size is optional. After choosing the continent and number click to apply button to see the results. If you want to reset the number of your choice click to the reset number button. Have a good learning and fun!
 
 
 ## Installation
@@ -24,15 +24,15 @@ https://github.com/wenubey/CountriesApp.git
 
 ![](screenshots/2.png)
 
-To clone the repository using HTTPS, under "HTTPS", click .
+To clone the repository using HTTPS, under "HTTPS".
 
-To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click SSH, then click .
+To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click SSH.
 
-To clone a repository using GitHub CLI, click GitHub CLI, then click .
+To clone a repository using GitHub CLI, click GitHub CLI.
 
 4. Open Git Bash.
 
-5. Change the current working directory to the location where you want the cloned directory.
+5. Change the current working directory to the location where you want the directory to be cloned.
 
 6. Type git clone, and then paste the URL you copied earlier.
 
