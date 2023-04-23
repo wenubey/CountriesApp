@@ -14,6 +14,7 @@ Install Countries app with github
 https://github.com/wenubey/CountriesApp.git
 
 2. Above the list of files, click  Code.
+
 ![](screenshots/1.png)
 
 3. Copy the URL for the repository.
