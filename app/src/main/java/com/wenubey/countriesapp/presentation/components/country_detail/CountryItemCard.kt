@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CurrencyExchange
 import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.Hive
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -17,7 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.wenubey.countriesapp.R
 import com.wenubey.countriesapp.core.nullCheck
-import com.wenubey.countriesapp.core.toFormattedStringList
+import com.wenubey.countriesapp.core.currencyMapToString
+import com.wenubey.countriesapp.core.toFormattedString
 import com.wenubey.countriesapp.data.remote.CountryDto
 
 @Composable
@@ -37,7 +40,7 @@ fun CountryItemCard(
             )
             Text(
                 text = country.name?.common.nullCheck(),
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodyMedium
             )
             CountryItemCardRow(
                 imageVector = Icons.Filled.Home,
@@ -52,14 +55,23 @@ fun CountryItemCard(
             CountryItemCardRow(
                 imageVector = Icons.Filled.CurrencyExchange,
                 contentDescription = stringResource(id = R.string.currencies_of_the_current_country),
-                text = country.currencies?.toFormattedStringList().nullCheck()
+                text = country.currencies?.currencyMapToString().nullCheck()
             )
             CountryItemCardRow(
                 imageVector = Icons.Filled.Public,
                 contentDescription = stringResource(R.string.subregion_of_this_country),
                 text = country.subregion.nullCheck()
             )
-
+            CountryItemCardRow(
+                imageVector = Icons.Filled.Language,
+                contentDescription = stringResource(R.string.spoken_language_of_this_country),
+                text = country.languages?.toFormattedString().nullCheck()
+            )
+            CountryItemCardRow(
+                imageVector = Icons.Filled.Hive,
+                contentDescription = stringResource(R.string.continent_name_of_current_country),
+                text = country.continents?.joinToString().nullCheck()
+            )
         }
     }
 }

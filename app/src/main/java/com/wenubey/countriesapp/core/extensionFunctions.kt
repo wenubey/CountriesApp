@@ -1,5 +1,6 @@
 package com.wenubey.countriesapp.core
 
+import androidx.compose.ui.text.toUpperCase
 import com.wenubey.countriesapp.data.remote.CurrencyDetailDto
 
 fun Map<String,String>.getKeyByValue(value: String): String? {
@@ -10,6 +11,10 @@ fun Map<String,String>.getKeyByValue(value: String): String? {
 
 fun String?.nullCheck(): String =  this ?: "No info found"
 
-fun Map<String, CurrencyDetailDto>.toFormattedStringList(): String {
+fun Map<String, CurrencyDetailDto>.currencyMapToString(): String {
     return this.map { (key, value) -> "$key: ${value.name} (${value.symbol})" }.joinToString()
+}
+
+fun Map<String, String>.toFormattedString(): String {
+    return this.map { (key, value) -> "${key.uppercase()}: $value" }.joinToString()
 }

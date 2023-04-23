@@ -9,4 +9,6 @@
     <string name="population_of_the_country">Population of the country</string>
     <string name="currencies_of_the_current_country">Currencies of the current country</string>
     <string name="subregion_of_this_country">Subregion of this country</string>
+    <string name="spoken_language_of_this_country">Spoken language of this country</string>
+    <string name="continent_name_of_current_country">Continent name of current country</string>
 </resources>
