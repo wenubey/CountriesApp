@@ -1,6 +1,6 @@
 package com.wenubey.countriesapp.core
 
-import com.wenubey.countriesapp.data.CurrencyDetail
+import com.wenubey.countriesapp.data.remote.CurrencyDetailDto
 
 fun Map<String,String>.getKeyByValue(value: String): String? {
     return this.entries.firstOrNull {
@@ -10,6 +10,6 @@ fun Map<String,String>.getKeyByValue(value: String): String? {
 
 fun String?.nullCheck(): String =  this ?: "No info found"
 
-fun Map<String, CurrencyDetail>.toFormattedStringList(): String {
+fun Map<String, CurrencyDetailDto>.toFormattedStringList(): String {
     return this.map { (key, value) -> "$key: ${value.name} (${value.symbol})" }.joinToString()
 }

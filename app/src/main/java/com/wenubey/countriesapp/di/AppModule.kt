@@ -3,8 +3,8 @@ package com.wenubey.countriesapp.di
 import com.apollographql.apollo3.ApolloClient
 import com.wenubey.countriesapp.core.Constants.BASE_URL_GRAPHQL
 import com.wenubey.countriesapp.core.Constants.BASE_URL_REST
-import com.wenubey.countriesapp.data.ApolloCountryClient
-import com.wenubey.countriesapp.data.CountriesApi
+import com.wenubey.countriesapp.data.remote.ApolloCountryClient
+import com.wenubey.countriesapp.data.remote.CountriesApi
 import com.wenubey.countriesapp.domain.CountryClient
 import com.wenubey.countriesapp.domain.use_case.GetCountriesInContinentUseCase
 import dagger.Module
@@ -50,4 +50,6 @@ object AppModule {
             .build()
             .create()
     }
+
+
 }

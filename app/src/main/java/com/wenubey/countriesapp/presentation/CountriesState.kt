@@ -1,6 +1,6 @@
 package com.wenubey.countriesapp.presentation
 
-import com.wenubey.countriesapp.data.CountryDto
+import com.wenubey.countriesapp.data.remote.CountryDto
 
 data class CountriesState(
     val countries: List<CountryDto> = emptyList(),

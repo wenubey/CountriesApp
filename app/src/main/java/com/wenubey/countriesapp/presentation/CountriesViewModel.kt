@@ -44,15 +44,18 @@ class CountriesViewModel @Inject constructor(
             val continent = ContinentMap.continentMap.getKeyByValue(state.value.selectedContinent) ?: ""
             val selectedNumber = state.value.selectedNumber
 
-            val countries = if (selectedNumber > 0) {
-                getCountriesInContinentUseCase.execute(continent).shuffled().take(selectedNumber)
-            } else {
-                getCountriesInContinentUseCase.execute(continent)
+            getCountriesInContinentUseCase.execute(continent).collect { countryList ->
+                val countries = if (selectedNumber > 0) {
+                    countryList.shuffled().take(selectedNumber)
+                } else {
+                    countryList
+                }
+                _state.update {
+                    it.copy(countries = countries, isLoading = false)
+                }
             }
 
-            _state.update {
-                it.copy(countries = countries, isLoading = false)
-            }
+
         }
     }
 }

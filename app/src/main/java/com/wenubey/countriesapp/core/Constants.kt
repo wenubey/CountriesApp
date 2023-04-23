@@ -9,5 +9,7 @@ object Constants {
     const val SELECTED_CONTINENT_KEY = "selectedContinent"
     const val SELECTED_NUMBER_KEY = "selectedNumber"
 
+    // Screen
     const val COUNTRIES_SCREEN = "countriesScreen"
+
 }

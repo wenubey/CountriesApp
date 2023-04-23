@@ -1,4 +1,4 @@
-package com.wenubey.countriesapp.data
+package com.wenubey.countriesapp.data.remote
 
 
 import retrofit2.http.GET

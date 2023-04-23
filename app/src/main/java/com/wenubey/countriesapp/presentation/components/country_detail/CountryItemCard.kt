@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.wenubey.countriesapp.R
 import com.wenubey.countriesapp.core.nullCheck
 import com.wenubey.countriesapp.core.toFormattedStringList
-import com.wenubey.countriesapp.data.CountryDto
+import com.wenubey.countriesapp.data.remote.CountryDto
 
 @Composable
 fun CountryItemCard(
