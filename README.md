@@ -3,7 +3,9 @@
 
 In this application, it is aimed to obtain information about the countries in the continent you have chosen. In addition, when you mark how many countries you want to see, the information of that many countries is shown randomly.
 
+## How To Use App
 
+You have to choose continent from continent row. If you don't choose anything application get Africa as a continent. Number of list is optional. After the choosing continent and number click to apply button to see any result. And if you want to reset the number choice click the reset the number button. Have a good learn and fun!
 
 
 ## Installation
@@ -11,6 +13,7 @@ In this application, it is aimed to obtain information about the countries in th
 Install Countries app with github
 
 1. On GitHub.com, navigate to the main page of the repository.
+
 https://github.com/wenubey/CountriesApp.git
 
 2. Above the list of files, click  Code.
