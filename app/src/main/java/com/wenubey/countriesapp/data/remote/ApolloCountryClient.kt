@@ -3,6 +3,7 @@ package com.wenubey.countriesapp.data.remote
 import android.util.Log
 import com.apollographql.apollo3.ApolloClient
 import com.wenubey.CountriesInContinentQuery
+import com.wenubey.countriesapp.core.Constants.TAG
 import com.wenubey.countriesapp.domain.CountryClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -29,7 +30,7 @@ class ApolloCountryClient(
                 val countries = api.getCountries(countryName)
                 list.addAll(countries)
             }catch (e: Exception) {
-                Log.e("TAG", "ApolloCountryClientCallError: $countryName", e)
+                Log.e(TAG, "ApolloCountryClientCallError: $countryName", e)
             }
         }
         emit(list)

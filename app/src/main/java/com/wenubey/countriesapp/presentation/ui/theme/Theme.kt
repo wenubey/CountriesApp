@@ -1,4 +1,4 @@
-package com.wenubey.countriesapp.ui.theme
+package com.wenubey.countriesapp.presentation.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

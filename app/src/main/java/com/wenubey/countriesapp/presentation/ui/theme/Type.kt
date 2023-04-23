@@ -1,4 +1,4 @@
-package com.wenubey.countriesapp.ui.theme
+package com.wenubey.countriesapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

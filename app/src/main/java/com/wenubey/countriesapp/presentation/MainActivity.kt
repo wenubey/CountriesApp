@@ -1,4 +1,4 @@
-package com.wenubey.countriesapp
+package com.wenubey.countriesapp.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.wenubey.countriesapp.navigation.NavGraph
-import com.wenubey.countriesapp.ui.theme.CountriesAppTheme
+import com.wenubey.countriesapp.presentation.ui.theme.CountriesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
